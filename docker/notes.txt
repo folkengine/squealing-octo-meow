@@ -1,0 +1,93 @@
+The following extra packages will be installed:
+  libasyncns0 libcaca0 libdirectfb-1.2-9 libflac8 libfluidsynth1 libjson-c2 libmad0 libmikmod3 libogg0 libopenal-data libopenal1 libportmidi0 libpulse0 libsdl-image1.2 libsdl-mixer1.2 libsdl-ttf2.0-0
+  libsdl1.2debian libsmpeg0 libsndfile1 libvorbis0a libvorbisenc2 libvorbisfile3 libwebp5 libwrap0 musescore-soundfont-gm python-numpy tcpd
+Suggested packages:
+  pulseaudio fluidsynth timidity python-nose python-numpy-dbg python-numpy-doc
+The following NEW packages will be installed:
+  libasyncns0 libcaca0 libdirectfb-1.2-9 libflac8 libfluidsynth1 libjson-c2 libmad0 libmikmod3 libogg0 libopenal-data libopenal1 libportmidi0 libpulse0 libsdl-image1.2 libsdl-mixer1.2 libsdl-ttf2.0-0
+  libsdl1.2debian libsmpeg0 libsndfile1 libvorbis0a libvorbisenc2 libvorbisfile3 libwebp5 libwrap0 musescore-soundfont-gm python-numpy python-pygame tcpd
+0 upgraded, 28 newly installed, 0 to remove and 2 not upgraded.
+
+# kivy with python 2.7 on precise
+
+FROM    ubuntu:precise
+
+# Add i386 architecture
+dpkg --add-architecture i386
+
+# Update repository
+RUN     apt-get -y update && apt-get -y upgrade
+
+# Install necessary system packages
+RUN     apt-get install -y build-essential mercurial git python2.7 \
+                           python-setuptools python-dev ffmpeg \
+                           libsdl-image1.2-dev libsdl-mixer1.2-dev \
+                           libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev \
+                           libportmidi-dev libswscale-dev libavformat-dev \
+                           libavcodec-dev zlib1g-dev wget curl mc \
+                           openssh-server telnet
+
+# Bootstrap a current Python environment
+RUN     apt-get remove --purge -y python-virtualenv python-pip
+RUN     easy_install-2.7 -U pip
+RUN     pip2.7 install -U virtualenv
+
+# Install current version of Cython
+RUN     apt-get remove --purge -y cython
+RUN     pip2.7 install -U cython
+
+# Install other PyGame dependencies
+RUN     apt-get remove --purge -y python-numpy
+RUN     pip2.7 install -U numpy
+
+# Install PyGame
+RUN     apt-get remove --purge python-pygame
+RUN     hg clone https://bitbucket.org/pygame/pygame
+RUN     cd pygame && python2.7 setup.py build && python2.7 setup.py install && cd .. && rm -rf pygame
+
+# Configure ssh server
+RUN     apt-get install -y openssh-server telnet
+RUN     mkdir /var/run/sshd
+RUN     echo 'root:supersecret' | chpasswd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+conda install --yes basemap pillow && conda clean -yt
+
+
+
+
+
+
+
+RUN conda create -p $CONDA_DIR/envs/python2 python=2.7 \
+    'ipython=4.0*' \
+    'ipywidgets=4.0*' \
+    'pandas=0.16*' \
+    'matplotlib=1.4*' \
+    'scipy=0.15*' \
+    'seaborn=0.6*' \
+    'scikit-learn=0.16*' \
+    'scikit-image=0.11*' \
+    'sympy=0.7*' \
+    'cython=0.22*' \
+    'patsy=0.3*' \
+    'statsmodels=0.6*' \
+    'cloudpickle=0.1*' \
+    'dill=0.2*' \
+    'numba=0.20*' \
+    'bokeh=0.9*' \
+    pyzmq \
+    && conda clean -yt
