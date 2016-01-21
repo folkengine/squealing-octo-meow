@@ -1,4 +1,4 @@
-from jupyter/datascience-notebook
+FROM jupyter/datascience-notebook
 
 # Based on the Jupyter DataScience Notebook
 # 
@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y apt-utils
 # http://www.lilypond.org/
 RUN apt-get install -y lilypond
 
+# Upgrade pip
+RUN pip install --upgrade pip
+RUN $PY2_DIR/bin/pip install --upgrade pip
 
 # Add PyAudio
 RUN apt-get install -y portaudio19-dev
@@ -50,14 +53,22 @@ RUN $PY2_DIR/bin/pip install pyproj
 RUN conda install --yes basemap pillow && conda clean -yt
 
 # Upgrade matplotlib to 1.5 to remove errors introduced in 1.4.3
-RUN pip install --upgrade matplotlib
+# NO LONGER NEEDED
+# RUN pip install --upgrade matplotlib
 # RUN $PY2_DIR/bin/pip install --upgrade matplotlib
+
+RUN pip install httpretty
+RUN pip install boto
+RUN pip install bz2file
+RUN pip install requests
+RUN pip install smart-open --no-dependencies
 
 # Gensim
 # https://radimrehurek.com/gensim/intro.html
-RUN pip install gensim
+RUN pip install gensim --no-dependencies
 
 # NLTK
 RUN pip install nltk
-RUN python -m nltk.downloader all
+# RUN ME
+# RUN python -m nltk.downloader all
 # RUN $PY2_DIR/bin/pip install nltk

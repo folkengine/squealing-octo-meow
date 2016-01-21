@@ -1,9 +1,16 @@
 # squealing-octo-meow
 Scratch Project for Music21
 
+Based on: https://github.com/jupyter/docker-stacks/tree/master/datascience-notebook
 
+Build and run the Docker image:
 
-
+    $> cd docker
+    $> docker build -t='music21' .
+    $> docker run -d -p 8888:8888 music21 start-notebook.sh
+    
+Now you'll need to open up a web browser to the IP address where your docker is running. For me localhost:8888 doesn't work 
+on OSX. 
 
 Resources
 =========
