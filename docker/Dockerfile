@@ -32,7 +32,7 @@ RUN pip install music21
 RUN $PY2_DIR/bin/pip install music21
 
 # Install Python Imaging Library
-#RUN pip install image
+RUN pip install image
 #RUN $PY2_DIR/bin/pip install image
 
 # Install Pygame
@@ -57,18 +57,25 @@ RUN conda install --yes basemap pillow && conda clean -yt
 # RUN pip install --upgrade matplotlib
 # RUN $PY2_DIR/bin/pip install --upgrade matplotlib
 
-RUN pip install httpretty
-RUN pip install boto
-RUN pip install bz2file
-RUN pip install requests
-RUN pip install smart-open --no-dependencies
-
-# Gensim
-# https://radimrehurek.com/gensim/intro.html
-RUN pip install gensim --no-dependencies
-
-# NLTK
-RUN pip install nltk
+## Upgrade pip AGAIN?!!! Why does it need to do it twice??!
+#RUN pip install --upgrade pip
+#RUN $PY2_DIR/bin/pip install --upgrade pip
+#
+#RUN pip install httpretty
+#RUN pip install boto
+#RUN pip install bz2file
+#RUN pip install requests
+#RUN pip install smart-open --no-dependencies
+#
+## Gensim
+## https://radimrehurek.com/gensim/intro.html
+#RUN pip install gensim --no-dependencies
+#
+## NLTK
+#RUN pip install nltk
 # RUN ME
 # RUN python -m nltk.downloader all
 # RUN $PY2_DIR/bin/pip install nltk
+
+# To install or upgrade MuseScore:
+RUN apt-get install -y musescore

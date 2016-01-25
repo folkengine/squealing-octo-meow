@@ -6,8 +6,8 @@ Based on: https://github.com/jupyter/docker-stacks/tree/master/datascience-noteb
 Build and run the Docker image:
 
     $> cd docker
-    $> docker build -t='music21' .
-    $> docker run -d -p 8888:8888 music21 start-notebook.sh
+    $> docker build -t='folkengine/squealing-octo-meow' .
+    $> docker run -d -p 8888:8888 folkengine/squealing-octo-meow start-notebook.sh
     
 Now you'll need to open up a web browser to the IP address where your docker is running. For me localhost:8888 doesn't work 
 on OSX. 
@@ -28,3 +28,7 @@ iReal Pro
 =========
 
 [Jazz 1300 Standards](http://www.irealb.com/forums/showthread.php?12753-Jazz-1300-Standards)
+
+
+
+[Presentation](http://folkengine.github.io/squealing-octo-meow/) made with [remark](https://github.com/gnab/remark)

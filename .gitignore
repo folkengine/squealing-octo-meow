@@ -62,3 +62,6 @@ target/
 # IntelliJ
 *.iml
 .idea/
+
+# IPython
+.ipynb_checkpoints/
